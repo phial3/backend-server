@@ -7,7 +7,7 @@ import java.io.Serial;
 
 /**
  * @description:
- * @project: springboot-graalVM
+ * @project: backend-sever
  * @datetime: 2021/12/27 17:50 Monday
  */
 @TableName(value = "t_user")
