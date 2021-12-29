@@ -1,4 +1,4 @@
-package org.example.demo.pixiu.base;
+package org.example.demo.base;
 
 import java.util.HashMap;
 import java.util.Map;

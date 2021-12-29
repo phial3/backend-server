@@ -1,4 +1,4 @@
-package org.example.demo.pixiu.base;
+package org.example.demo.base;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -10,6 +10,7 @@ import java.io.Serializable;
  * @datetime: 2021/12/27 19:00 Monday
  */
 public final class RestStatus implements Serializable {
+
     @Serial
     private static final long serialVersionUID = -2014592760065018707L;
     public static final RestStatus OK = new RestStatus(0, "OK");

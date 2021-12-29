@@ -1,4 +1,4 @@
-package org.example.demo.pixiu.base;
+package org.example.demo.base;
 
 /**
  * @description:
@@ -6,8 +6,8 @@ package org.example.demo.pixiu.base;
  * @author: gaoyanfei3
  * @datetime: 2021/12/27 22:44 Monday
  */
-public class Limit {
-    public static String of(int pageNo, int pageSize) {
+public class PageResult {
+    public static String limit(int pageNo, int pageSize) {
         if (pageNo < 1) {
             pageNo = 1;
         }
@@ -18,4 +18,5 @@ public class Limit {
         // int totalPage = Math.ceil(total / pageSize) + 1;
         return offset + "," + pageSize;
     }
+
 }

@@ -1,11 +1,10 @@
-package org.example.demo.pixiu.entity;
+package org.example.demo.base;
 
-import com.baomidou.mybatisplus.annotation.*;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serial;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,12 +14,10 @@ import java.util.Objects;
  * @author: gaoyanfei3
  * @datetime: 2021/12/27 18:17 Monday
  */
-public abstract class NamedEntity<T extends Model<?>> extends Model<T> implements Serializable {
+public abstract class NamedEntity extends LongEntity {
+
     @Serial
     private static final long serialVersionUID = 4857918608389216803L;
-
-    @TableId(type = IdType.AUTO)
-    protected Long id;
 
     @TableField
     protected String name;
@@ -31,11 +28,11 @@ public abstract class NamedEntity<T extends Model<?>> extends Model<T> implement
     @TableField
     protected String description;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     @TableField
     protected Date createTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     @TableField
     protected Date updateTime;
 
@@ -52,16 +49,12 @@ public abstract class NamedEntity<T extends Model<?>> extends Model<T> implement
     @TableField(select = false)
     private Integer deleted;
 
-
+    ////
     public NamedEntity() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public NamedEntity(Long id) {
+        super(id);
     }
 
     public String getName() {
@@ -132,9 +125,8 @@ public abstract class NamedEntity<T extends Model<?>> extends Model<T> implement
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof NamedEntity)) return false;
-        NamedEntity<?> that = (NamedEntity<?>) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
+        NamedEntity that = (NamedEntity) o;
+        return Objects.equals(name, that.name) &&
                 Objects.equals(extras, that.extras) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(createTime, that.createTime) &&
@@ -146,14 +138,13 @@ public abstract class NamedEntity<T extends Model<?>> extends Model<T> implement
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, extras, description, createTime, updateTime, creator, editor, deleted);
+        return Objects.hash(name, extras, description, createTime, updateTime, creator, editor, deleted);
     }
 
     @Override
     public String toString() {
         return "NamedEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", extras='" + extras + '\'' +
                 ", description='" + description + '\'' +
                 ", createTime=" + createTime +

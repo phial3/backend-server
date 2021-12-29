@@ -1,4 +1,4 @@
-package org.example.demo.pixiu.base;
+package org.example.demo.base;
 
 /**
  * @description: <br/>
@@ -18,5 +18,6 @@ public interface DataConstant {
     String RESP_KEY_LIST = "list";
 
     String RESP_KEY_TOTAL = "total";
+
 
 }
