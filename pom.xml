@@ -19,6 +19,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <spring-native.version>0.11.1</spring-native.version>
 
+        <tomcat.version>10.0.14</tomcat.version>
         <h2.version>2.0.204</h2.version>
         <mysql.version>8.0.27</mysql.version>
         <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
@@ -56,13 +57,6 @@
             <groupId>org.springframework.experimental</groupId>
             <artifactId>spring-native</artifactId>
             <version>${spring-native.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/cglib/cglib -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>3.3.0</version>
         </dependency>
 
         <!-- database -->
