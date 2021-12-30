@@ -4,9 +4,8 @@ import org.apache.commons.beanutils.BeanUtilsBean2;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.lang3.StringUtils;
 import org.example.demo.base.AbstractBusiness;
-import org.example.demo.entity.Attribute;
 import org.example.demo.base.AttributeItem;
-import org.example.demo.base.SessionManager;
+import org.example.demo.entity.Attribute;
 import org.example.demo.entity.SysSettings;
 import org.example.demo.entity.User;
 import org.phial.mybatisx.api.query.Query;
@@ -16,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -35,9 +33,6 @@ public class AttributeBusiness extends AbstractBusiness<Attribute> {
     private static final Logger LOG = LoggerFactory.getLogger(AttributeBusiness.class);
 
     private static final String GROUP_SETTINGS = "settings";
-
-    @Resource
-    private SessionManager sessionManager;
 
 //    @Resource
 //    private CacheClient cacheClient;

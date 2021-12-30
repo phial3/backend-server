@@ -25,8 +25,11 @@ import java.util.Map;
 public class UserBusiness extends AbstractBusiness<User> {
     private static final String ADMIN_USERNAME = "admin";
 
-    @Resource
-    private AttributeBusiness attributeBusiness;
+    private final AttributeBusiness attributeBusiness;
+
+    public UserBusiness(AttributeBusiness attributeBusiness) {
+        this.attributeBusiness = attributeBusiness;
+    }
 
     public  Map<String, String> settings() {
         // 加载用户属性

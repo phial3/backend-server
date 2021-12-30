@@ -51,16 +51,16 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
     public static final String INITIALIZER_USERNAME = "SYSTEM";
     private static Map<String, PrivilegeMetaData> PRIVILEGE_METADATA = new HashMap<>();
 
+    private final BasicDAO dao;
+    private final SessionManager sessionManager;
+    private final AttributeBusiness attributeBusiness;
     private ApplicationContext applicationContext;
 
-    @Resource
-    private BasicDAO dao;
-
-    @Autowired
-    private AttributeBusiness attributeBusiness;
-
-    @Resource
-    private SessionManager sessionManager;
+    public ApplicationDataInitializer(BasicDAO dao, AttributeBusiness attrBusiness, SessionManager sessionManager) {
+        this.dao = dao;
+        this.attributeBusiness = attrBusiness;
+        this.sessionManager = sessionManager;
+    }
 
     private static final String MENUS[][] = new String[][]{
             // #### children-count, name, icon, url, id
@@ -486,31 +486,5 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
             return str;
         }
         return str.replaceAll("[\\[\\]]", "");
-    }
-
-    public static void main(String[] args) {
-        AtomicLong idGen = new AtomicLong(10000);
-        int children = 0;
-        long pid = 0;
-
-        for (String menuitem[] : MENUS) {
-            long parentId = 0;
-            long id = idGen.incrementAndGet();
-
-            if (--children >= 0) { // 子节点
-                parentId = pid;
-            } else {  // 处理完了子节点
-                children = Integer.parseInt(menuitem[0]);
-                if (children > 0) {
-                    pid = id;
-                }
-            }
-            // Menu menu = dao.getInclude(new Menu(id), "id");
-            //  if (menu == null) {
-            System.out.println(id + "-" + parentId + "-" + menuitem[1] + menuitem[2] + menuitem[3] + menuitem[4]);
-            // } else {
-            //    order.incrementAndGet();
-            // }
-        }
     }
 }

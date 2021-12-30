@@ -34,9 +34,9 @@ public class SessionController extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SessionController.class);
 
-    private AppConfig config;
-    private SessionManager sessionManager;
-    private UserBusiness userBusiness;
+    private final AppConfig config;
+    private final SessionManager sessionManager;
+    private final UserBusiness userBusiness;
 
     public SessionController(AppConfig config, SessionManager sessionManager, UserBusiness userBusiness) {
         this.config = config;

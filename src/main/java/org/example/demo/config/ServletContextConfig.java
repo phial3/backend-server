@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.lang.reflect.Field;
@@ -25,7 +26,7 @@ import java.lang.reflect.Field;
 @Component
 public class ServletContextConfig implements ServletContextInitializer {
 
-    @Autowired
+    @Resource
     private AppConfig config;
 
     @Override

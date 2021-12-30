@@ -29,7 +29,7 @@ public class UserController extends DataController<User> {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
-    private UserBusiness business;
+    private final UserBusiness business;
 
     public UserController(UserBusiness userBusiness) {
         this.business = userBusiness;

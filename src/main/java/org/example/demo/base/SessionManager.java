@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SessionManager extends ConfigurableSession<User> implements InitializingBean {
 
     public SessionManager() {
+        super();
     }
 
     @Override
