@@ -1,5 +1,6 @@
 package org.example.demo.utils;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.example.demo.base.Dependency;
@@ -14,6 +15,8 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -218,5 +221,39 @@ public class SysCommonUtils {
     public static String format(Date date) {
         if (date == null) return "-";
         return FORMAT_THREAD_LOCAL.get().format(date);
+    }
+
+    public static String encodePath(List<Long> menuIdList) {
+        if (CollectionUtils.isNotEmpty(menuIdList)) {
+            return menuIdList.stream().map(e -> "[" + e + "]").collect(Collectors.joining(","));
+        }
+        return "";
+    }
+
+    public static List<Long> decodePath(String menuIdPath) {
+        if (StringUtils.isBlank(menuIdPath)) {
+            return Collections.emptyList();
+        }
+        return Stream.of(menuIdPath.split(",")).map(e -> Long.parseLong(e.replaceAll("[\\[\\]]", ""))).collect(Collectors.toList());
+    }
+
+    /**
+     * 以逗号间隔
+     *
+     * @param str
+     * @return
+     */
+    public static String encodeStr(String str) {
+        if (StringUtils.isBlank(str)) {
+            return "";
+        }
+        return Stream.of(str.split(",")).map(e -> "[" + e + "]").collect(Collectors.joining(","));
+    }
+
+    public static String decodeStr(String str) {
+        if (StringUtils.isBlank(str)) {
+            return str;
+        }
+        return str.replaceAll("[\\[\\]]", "");
     }
 }

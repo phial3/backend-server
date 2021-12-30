@@ -10,6 +10,7 @@ import org.phial.mybatisx.api.enums.DataType;
 import org.phial.mybatisx.api.enums.IndexType;
 
 import java.io.Serial;
+import java.util.Set;
 
 /**
  * @description:
@@ -28,6 +29,8 @@ public class User extends AbstractUser {
 
     @Column(comment = "是否管理员", type = DataType.BIT, length = "1")
     private Boolean administrator;
+
+    private Set<String> privileges;
 
     public User() {
     }
@@ -50,5 +53,13 @@ public class User extends AbstractUser {
 
     public void setAdministrator(Boolean administrator) {
         this.administrator = administrator;
+    }
+
+    public Set<String> getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(Set<String> privileges) {
+        this.privileges = privileges;
     }
 }

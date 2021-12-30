@@ -1,7 +1,5 @@
 package org.example.demo;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.example.demo.base.*;
 import org.example.demo.business.AttributeBusiness;
@@ -19,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -33,8 +30,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * 系统初始化。初始化用户、菜单、权限等信息
@@ -51,16 +46,16 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
     public static final String INITIALIZER_USERNAME = "SYSTEM";
     private static Map<String, PrivilegeMetaData> PRIVILEGE_METADATA = new HashMap<>();
 
-    private final BasicDAO dao;
-    private final SessionManager sessionManager;
-    private final AttributeBusiness attributeBusiness;
-    private ApplicationContext applicationContext;
+    @Resource
+    private BasicDAO dao;
 
-    public ApplicationDataInitializer(BasicDAO dao, AttributeBusiness attrBusiness, SessionManager sessionManager) {
-        this.dao = dao;
-        this.attributeBusiness = attrBusiness;
-        this.sessionManager = sessionManager;
-    }
+    @Resource
+    private SessionManager sessionManager;
+
+    @Resource
+    private AttributeBusiness attributeBusiness;
+
+    private ApplicationContext applicationContext;
 
     private static final String MENUS[][] = new String[][]{
             // #### children-count, name, icon, url, id
@@ -431,9 +426,9 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
         m.setId(id);
         m.setParentId(pid);
         if (pid == 0) {
-            m.setMenuIdPath(encodePath(Lists.list(pid, id)));
+            m.setMenuIdPath(SysCommonUtils.encodePath(Lists.list(pid, id)));
         } else {
-            m.setMenuIdPath(encodePath(Lists.list(0L, pid, id)));
+            m.setMenuIdPath(SysCommonUtils.encodePath(Lists.list(0L, pid, id)));
         }
         m.setMenuCode(menuCode);
         m.setName(name);
@@ -454,37 +449,4 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
     }
 
 
-    public static String encodePath(List<Long> menuIdList) {
-        if (CollectionUtils.isNotEmpty(menuIdList)) {
-            return menuIdList.stream().map(e -> "[" + e + "]").collect(Collectors.joining(","));
-        }
-        return "";
-    }
-
-    public static List<Long> decodePath(String menuIdPath) {
-        if (StringUtils.isBlank(menuIdPath)) {
-            return Collections.emptyList();
-        }
-        return Stream.of(menuIdPath.split(",")).map(e -> Long.parseLong(e.replaceAll("[\\[\\]]", ""))).collect(Collectors.toList());
-    }
-
-    /**
-     * 以逗号间隔
-     *
-     * @param str
-     * @return
-     */
-    public static String encodeStr(String str) {
-        if (StringUtils.isBlank(str)) {
-            return "";
-        }
-        return Stream.of(str.split(",")).map(e -> "[" + e + "]").collect(Collectors.joining(","));
-    }
-
-    public static String decodeStr(String str) {
-        if (StringUtils.isBlank(str)) {
-            return str;
-        }
-        return str.replaceAll("[\\[\\]]", "");
-    }
 }

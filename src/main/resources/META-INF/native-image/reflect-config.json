@@ -1,13 +1,5 @@
 [
     {
-        "name": "org.apache.ibatis.logging.slf4j.Slf4jImpl",
-        "allDeclaredFields": true,
-        "allDeclaredConstructors": true,
-        "allDeclaredMethods": true,
-        "allPublicMethods": true,
-        "allDeclaredClasses": true
-    },
-    {
         "name": "org.slf4j.Marker",
         "allDeclaredFields": true,
         "allDeclaredConstructors": true,
@@ -16,7 +8,7 @@
         "allDeclaredClasses": true
     },
     {
-        "name": "org.apache.ibatis.javassist.util.proxy.ProxyFactory",
+        "name": "org.apache.ibatis.mapping.SqlSource",
         "allDeclaredFields": true,
         "allDeclaredConstructors": true,
         "allDeclaredMethods": true,
@@ -24,7 +16,31 @@
         "allDeclaredClasses": true
     },
     {
-        "name": "org.apache.ibatis.scripting.xmltags.XMLLanguageDriver",
+        "name": "org.apache.ibatis.builder.annotation.ProviderSqlSource",
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allPublicMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.scripting.xmltags.DynamicSqlSource",
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allPublicMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.scripting.defaults.RawSqlSource",
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allPublicMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.builder.StaticSqlSource",
         "allDeclaredFields": true,
         "allDeclaredConstructors": true,
         "allDeclaredMethods": true,
@@ -38,5 +54,154 @@
         "allDeclaredMethods": true,
         "allPublicMethods": true,
         "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.annotations.UpdateProvider",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredFields": true,
+        "allDeclaredMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "java.util.Map",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "java.util.HashMap",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "java.util.ArrayList",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "java.util.List",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "java.util.Set",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "java.util.HashSet",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "java.util.Collection",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.javassist.util.proxy.ProxyFactory",
+        "allPublicMethods": true,
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.scripting.xmltags.XMLLanguageDriver",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredFields": true,
+        "allDeclaredMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.io.JBoss6VFS",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.io.DefaultVFS",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.InstantTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.LocalDateTimeTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.LocalDateTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.LocalTimeTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.OffsetDateTimeTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.OffsetTimeTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.ZonedDateTimeTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.MonthTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.YearTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.YearMonthTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.type.JapaneseDateTypeHandler",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.logging.slf4j.Slf4jImpl",
+        "allPublicConstructors": true,
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allPublicMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.logging.stdout.StdOutImpl",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory",
+        "allPublicConstructors": true
+    },
+    {
+        "name": "org.apache.ibatis.datasource.unpooled.UnpooledDataSource",
+        "allPublicConstructors": true,
+        "allPublicMethods": true
+    },
+    {
+        "name": "org.apache.ibatis.annotations.Insert",
+        "allPublicMethods": true
+    },
+    {
+        "name": "org.apache.ibatis.session.Configuration",
+        "allPublicMethods": true
+    },
+    {
+        "name": "com.sun.org.apache.xerces.internal.impl.dv.xs.SchemaDVFactoryImpl",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
     }
 ]

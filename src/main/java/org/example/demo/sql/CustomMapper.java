@@ -4,7 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 /**
- * 自定义SQL的 Mapper
+ * 自定义SQL的 Mapper :
+ * https://www.jianshu.com/p/76672124ca67
  * @since 2019-07-06
  * @author phial
  * @vendor

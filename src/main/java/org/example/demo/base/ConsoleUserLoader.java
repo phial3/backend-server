@@ -16,9 +16,7 @@ public class ConsoleUserLoader extends DefaultUserLoader<User> {
 
     @Override
     protected User queryUser(String username) {
-
         BasicDAO dao = session().dao();
-
         Query<User> query = QueryBuilder.custom(User.class)
                 .andEquivalent(User::getUsername, username)
                 .build();

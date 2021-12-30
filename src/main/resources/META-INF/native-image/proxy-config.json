@@ -1,0 +1,235 @@
+[
+    {
+        "interfaces": [
+            "org.example.demo.sql.CustomMapper",
+            "org.springframework.transaction.interceptor.TransactionalProxy",
+            "org.springframework.aop.framework.Advised",
+            "org.springframework.core.DecoratingProxy"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.phial.mybatisx.dal.dao.DataBaseRouteAccessor",
+            "org.phial.mybatisx.dal.ShardingEntityAccessor",
+            "org.springframework.beans.factory.InitializingBean"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.context.ApplicationContextAware",
+            "org.springframework.core.env.EnvironmentCapable",
+            "org.springframework.context.EnvironmentAware",
+            "javax.servlet.Servlet",
+            "javax.servlet.ServletConfig",
+            "java.io.Serializable"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.autoconfigure.web.servlet.DispatcherServletPath",
+            "org.springframework.boot.web.servlet.ServletContextInitializer",
+            "org.springframework.core.Ordered"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.context.ApplicationContextAware",
+            "org.springframework.beans.factory.config.BeanPostProcessor"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.web.server.WebServerFactoryCustomizer",
+            "org.springframework.core.Ordered"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.web.server.ErrorPageRegistrar",
+            "org.springframework.core.Ordered"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.web.servlet.filter.OrderedFilter",
+            "javax.servlet.Filter",
+            "org.springframework.beans.factory.BeanNameAware",
+            "org.springframework.context.EnvironmentAware",
+            "org.springframework.core.env.EnvironmentCapable",
+            "org.springframework.web.context.ServletContextAware",
+            "org.springframework.beans.factory.InitializingBean",
+            "org.springframework.beans.factory.DisposableBean"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.core.task.AsyncListenableTaskExecutor",
+            "org.springframework.scheduling.SchedulingTaskExecutor",
+            "org.springframework.beans.factory.BeanNameAware",
+            "org.springframework.beans.factory.InitializingBean",
+            "org.springframework.beans.factory.DisposableBean",
+            "java.util.concurrent.ThreadFactory",
+            "java.io.Serializable"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.servlet.config.annotation.WebMvcConfigurer",
+            "org.springframework.context.ApplicationContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.core.task.AsyncListenableTaskExecutor",
+            "org.springframework.scheduling.SchedulingTaskExecutor",
+            "org.springframework.scheduling.TaskScheduler",
+            "org.springframework.beans.factory.BeanNameAware",
+            "org.springframework.beans.factory.InitializingBean",
+            "org.springframework.beans.factory.DisposableBean",
+            "java.util.concurrent.ThreadFactory",
+            "java.io.Serializable"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.servlet.ViewResolver",
+            "org.springframework.core.Ordered",
+            "org.springframework.web.context.ServletContextAware",
+            "org.springframework.context.ApplicationContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolver",
+            "org.springframework.core.Ordered"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.web.servlet.error.ErrorAttributes",
+            "org.springframework.web.servlet.HandlerExceptionResolver",
+            "org.springframework.core.Ordered"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.servlet.config.annotation.WebMvcConfigurer",
+            "org.springframework.web.context.ServletContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.context.ResourceLoaderAware",
+            "org.springframework.context.ApplicationContextAware",
+            "org.springframework.web.context.ServletContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.web.embedded.tomcat.ConfigurableTomcatWebServerFactory",
+            "org.springframework.context.ResourceLoaderAware",
+            "org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory",
+            "org.springframework.boot.web.server.ConfigurableWebServerFactory"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer",
+            "org.springframework.core.Ordered"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.beans.factory.BeanFactoryAware",
+            "org.springframework.beans.factory.InitializingBean",
+            "java.io.Serializable",
+            "com.fasterxml.jackson.core.Versioned"
+        ]
+    },
+    {
+        "interfaces": [
+            "java.io.Serializable",
+            "com.fasterxml.jackson.core.Versioned"
+        ]
+    },
+    {
+        "interfaces": [
+            "com.fasterxml.jackson.core.Versioned",
+            "java.io.Serializable"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.beans.factory.BeanFactoryAware",
+            "org.springframework.beans.factory.InitializingBean",
+            "org.springframework.web.servlet.HandlerAdapter",
+            "org.springframework.core.Ordered",
+            "org.springframework.web.context.ServletContextAware",
+            "org.springframework.context.ApplicationContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.context.ApplicationListener",
+            "org.springframework.context.ApplicationContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.servlet.handler.MatchableHandlerMapping",
+            "org.springframework.context.EmbeddedValueResolverAware",
+            "org.springframework.beans.factory.InitializingBean",
+            "org.springframework.web.servlet.HandlerMapping",
+            "org.springframework.core.Ordered",
+            "org.springframework.beans.factory.BeanNameAware",
+            "org.springframework.web.context.ServletContextAware",
+            "org.springframework.context.ApplicationContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.format.FormatterRegistry",
+            "org.springframework.context.EmbeddedValueResolverAware",
+            "org.springframework.core.convert.support.ConfigurableConversionService"
+        ]
+    },
+    {
+        "interfaces": [
+            "java.lang.reflect.ParameterizedType",
+            "org.springframework.core.SerializableTypeWrapper$SerializableTypeProxy",
+            "java.io.Serializable"
+        ]
+    },
+    {
+        "interfaces": [
+            "java.lang.reflect.TypeVariable",
+            "org.springframework.core.SerializableTypeWrapper$SerializableTypeProxy",
+            "java.io.Serializable"
+        ]
+    },
+    {
+        "interfaces": [
+            "java.lang.reflect.WildcardType",
+            "org.springframework.core.SerializableTypeWrapper$SerializableTypeProxy",
+            "java.io.Serializable"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.context.properties.ConfigurationProperties",
+            "org.springframework.core.annotation.SynthesizedAnnotation"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.bind.annotation.PathVariable",
+            "org.springframework.core.annotation.SynthesizedAnnotation"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.bind.annotation.RequestMapping",
+            "org.springframework.core.annotation.SynthesizedAnnotation"
+        ]
+    }
+]

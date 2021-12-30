@@ -8,10 +8,14 @@ import org.phial.rest.web.session.UserLoader;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class SessionManager extends ConfigurableSession<User> implements InitializingBean {
+
+    @Resource
+    private AppConfig config;
 
     @Override
     protected UserLoader<User> createUserLoader() {
@@ -21,10 +25,9 @@ public class SessionManager extends ConfigurableSession<User> implements Initial
     @Override
     protected void configSession(UserLoader<User> userLoader) {
         setUserLoader(userLoader);
-        AppConfig config = config();
-        setDomain(config.getDomain());
-        setTokenName(config.getTokenCookieName());
-        setCrypto(new BouncyCastleCrypto(config.getConsoleAesKey().secretKeyStore()));
+//        setDomain(config.getDomain());
+//        setTokenName(config.getTokenCookieName());
+//        setCrypto(new BouncyCastleCrypto(config.getConsoleAesKey().secretKeyStore()));
     }
 
     @Override

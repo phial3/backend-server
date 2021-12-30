@@ -14,6 +14,8 @@ import org.phial.rest.web.RestResponse;
 import org.phial.rest.web.session.SessionUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.nativex.hint.AotProxyHint;
+import org.springframework.nativex.hint.ProxyBits;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,13 +25,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 
- * @since 2019-07-10
  * @author mayanjun
  * @vendor JDD (https://www.jddglobal.com)
+ * @since 2019-07-10
  */
 @RestController
 @RequestMapping("api/session")
+@AotProxyHint(targetClass = org.example.demo.controller.SessionController.class, proxyFeatures = ProxyBits.IS_STATIC)
 public class SessionController extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SessionController.class);

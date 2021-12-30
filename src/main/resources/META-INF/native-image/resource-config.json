@@ -1,0 +1,18 @@
+{
+    "resources": {
+        "includes": [
+            {
+                "pattern": "\\QMETA-INF/spring.factories\\E"
+            },
+            {
+                "pattern": "\\Qapplication.properties\\E"
+            },
+            {
+                "pattern": ".*example.*xml$"
+            },
+            {
+                "pattern": ".*example.*sql$"
+            }
+        ]
+    }
+}
