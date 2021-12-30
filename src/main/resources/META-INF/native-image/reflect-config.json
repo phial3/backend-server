@@ -1,0 +1,42 @@
+[
+    {
+        "name": "org.apache.ibatis.logging.slf4j.Slf4jImpl",
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allPublicMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.slf4j.Marker",
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allPublicMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.javassist.util.proxy.ProxyFactory",
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allPublicMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.scripting.xmltags.XMLLanguageDriver",
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allPublicMethods": true,
+        "allDeclaredClasses": true
+    },
+    {
+        "name": "org.apache.ibatis.scripting.defaults.RawLanguageDriver",
+        "allDeclaredFields": true,
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true,
+        "allPublicMethods": true,
+        "allDeclaredClasses": true
+    }
+]

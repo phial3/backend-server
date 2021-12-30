@@ -19,10 +19,9 @@
         <maven.compiler.target>17</maven.compiler.target>
         <spring-native.version>0.11.1</spring-native.version>
 
-        <tomcat.version>10.0.14</tomcat.version>
         <h2.version>2.0.204</h2.version>
         <mysql.version>8.0.27</mysql.version>
-        <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
+        <mybatis.version>3.5.9</mybatis.version>
     </properties>
 
 
@@ -48,12 +47,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.experimental</groupId>
             <artifactId>spring-native</artifactId>
             <version>${spring-native.version}</version>
@@ -61,16 +54,57 @@
 
         <!-- database -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus.version}</version>
+            <groupId>org.phial</groupId>
+            <artifactId>mybatisx-starter</artifactId>
+            <version>1.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.phial</groupId>
+            <artifactId>rest-web</artifactId>
+            <version>0.0.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>io.airlift</groupId>
+            <artifactId>airline</artifactId>
+            <version>0.9</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.github.rvesse</groupId>-->
+        <!--            <artifactId>airline</artifactId>-->
+        <!--            <version>2.8.3</version>-->
+        <!--            <exclusions>-->
+        <!--                <exclusion>-->
+        <!--                    <artifactId>guava</artifactId>-->
+        <!--                    <groupId>com.google.guava</groupId>-->
+        <!--                </exclusion>-->
+        <!--            </exclusions>-->
+        <!--        </dependency>-->
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -78,7 +112,6 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
-
 
     <profiles>
         <profile>
@@ -92,11 +125,11 @@
             </properties>
 
             <dependencies>
-                <dependency>
-                    <groupId>org.junit.platform</groupId>
-                    <artifactId>junit-platform-launcher</artifactId>
-                    <scope>test</scope>
-                </dependency>
+                <!--                <dependency>-->
+                <!--                    <groupId>org.junit.platform</groupId>-->
+                <!--                    <artifactId>junit-platform-launcher</artifactId>-->
+                <!--                    <scope>test</scope>-->
+                <!--                </dependency>-->
             </dependencies>
 
             <build>
@@ -165,6 +198,40 @@
                     </execution>
                 </executions>
             </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-shade-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>shade</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <createDependencyReducedPom>false</createDependencyReducedPom>-->
+<!--                            <artifactSet>-->
+<!--                                <includes>-->
+<!--                                    <include>org.mybatis:mybatis</include>-->
+<!--                                    <include>ognl:ognl</include>-->
+<!--                                    <include>org.javassist:javassist</include>-->
+<!--                                </includes>-->
+<!--                            </artifactSet>-->
+<!--                            <relocations>-->
+<!--                                <relocation>-->
+<!--                                    <pattern>ognl</pattern>-->
+<!--                                    <shadedPattern>org.apache.ibatis.ognl</shadedPattern>-->
+<!--                                </relocation>-->
+<!--                                <relocation>-->
+<!--                                    <pattern>javassist</pattern>-->
+<!--                                    <shadedPattern>org.apache.ibatis.javassist</shadedPattern>-->
+<!--                                </relocation>-->
+<!--                            </relocations>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+
         </plugins>
     </build>
 

@@ -1,10 +1,9 @@
 package org.example.demo.base;
 
-import org.example.demo.base.*;
+import org.phial.mybatisx.api.entity.Entity;
+import org.phial.myrest.RestResponse;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description:
@@ -13,16 +12,16 @@ import javax.servlet.http.HttpServletRequest;
  * @datetime: 2021/12/27 18:50 Monday
  */
 @ControllerAdvice
-public abstract class BaseController<T extends Entity> {
+public abstract class DataController<T extends Entity> {
 
-    protected abstract AbstractService<T> service();
+    protected abstract AbstractBusiness<T> service();
 
-    public BaseController() {
+    public DataController() {
     }
 
     @ResponseBody
     @ExceptionHandler({Throwable.class})
-    protected Object handleException(Throwable e, HttpServletRequest request) {
+    protected Object handleException(Throwable e) {
         return e.getMessage();
     }
 
@@ -49,7 +48,7 @@ public abstract class BaseController<T extends Entity> {
         return RestResponse.ok();
     }
 
-    protected Object list(ParametersBuilder<T> pb, Integer page, Integer pageSize) {
+    protected Object list(ParametersBuilder pb, Integer page, Integer pageSize) {
         return RestResponse.ok()
                 .add(DataConstant.RESP_KEY_LIST, service().list(pb, page, pageSize))
                 .add(DataConstant.RESP_KEY_TOTAL, service().count(pb));

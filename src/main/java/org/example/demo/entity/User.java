@@ -1,7 +1,11 @@
 package org.example.demo.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import org.example.demo.base.NamedEntity;
+import org.example.demo.base.AbstractUser;
+import org.phial.mybatisx.api.annotation.Index;
+import org.phial.mybatisx.api.annotation.IndexColumn;
+import org.phial.mybatisx.api.annotation.Table;
+import org.phial.mybatisx.api.entity.NamedEntity;
+import org.phial.mybatisx.api.enums.IndexType;
 
 import java.io.Serial;
 
@@ -10,8 +14,12 @@ import java.io.Serial;
  * @project: backend-sever
  * @datetime: 2021/12/27 17:50 Monday
  */
-@TableName(value = "t_user")
-public final class User extends NamedEntity {
+@Table(value = "t_user",
+        indexes = {
+                @Index(value = "idx_username", columns = @IndexColumn(value = "username", length = 32), type = IndexType.UNIQUE)
+        },
+        comment = "用户")
+public class User extends AbstractUser {
 
     @Serial
     private static final long serialVersionUID = -2335190050160138088L;
@@ -21,6 +29,14 @@ public final class User extends NamedEntity {
 
     public User(Long id) {
         super(id);
+    }
+
+    public User(String username) {
+        super(username);
+    }
+
+    public User(Long id, String username) {
+        super(id, username);
     }
 
 }

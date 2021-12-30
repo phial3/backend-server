@@ -1,14 +1,22 @@
 package org.example.demo.controller;
 
-import org.example.demo.base.*;
+import org.example.demo.base.AbstractBusiness;
+import org.example.demo.base.DataConstant;
+import org.example.demo.base.DataController;
+import org.example.demo.base.ParametersBuilder;
+import org.example.demo.business.UserBusiness;
+import org.example.demo.config.AppConfig;
 import org.example.demo.entity.User;
-import org.example.demo.service.RoleService;
-import org.example.demo.service.UserService;
+import org.example.demo.utils.JsonUtils;
+import org.phial.mybatisx.api.query.SortDirection;
+import org.phial.myrest.RestResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import java.util.Arrays;
 
 /**
  * @description:
@@ -18,41 +26,47 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("api/user")
-public class UserController extends BaseController<User> {
+public class UserController extends DataController<User> {
 
-    @Resource
-    private UserService userService;
+    private static final Logger LOG = LoggerFactory.getLogger(AppConfig.class);
 
-    @Resource
-    private RoleService roleService;
+    private UserBusiness business;
+
+    public UserController(UserBusiness userBusiness) {
+        this.business = userBusiness;
+    }
 
     @Override
-    protected AbstractService<User> service() {
-        return userService;
+    protected AbstractBusiness<User> service() {
+        return business;
     }
 
     @Override
     @GetMapping("{id}")
     public Object get(@PathVariable long id) {
+        LOG.info("#### UserController get() id={}", id);
         return super.get(id);
     }
 
     @Override
     @PostMapping("delete")
     public Object delete(@RequestBody Long[] ids) {
+        LOG.info("#### UserController delete() ids={}", Arrays.asList(ids));
         return super.delete(ids);
     }
 
     @Override
     @PostMapping
     public Object save(@RequestBody User bean) {
-        Assert.isTrue(StringUtils.hasText(bean.getName()), "name is not null");
+        LOG.info("#### UserController save() param={}", JsonUtils.toJson(bean));
+        Assert.isTrue(StringUtils.hasText(bean.getUsername()), "name must not null!");
         return super.save(bean);
     }
 
     @Override
     @PostMapping("update")
     public Object update(@RequestBody User bean) {
+        LOG.info("#### UserController update() param={}", JsonUtils.toJson(bean));
         return super.update(bean);
     }
 
@@ -64,7 +78,10 @@ public class UserController extends BaseController<User> {
                        @RequestParam(required = false) Long id,
                        @RequestParam(required = false) String name) {
 
-        ParametersBuilder<User> parametersBuilder = ParametersBuilder.<User>custom(orderField, orderDirection);
+        LOG.info("#### UserController list() pageNo={}, pageSize={}, orderField={}, sort={}, id={}, name={}",
+                pageNo, pageSize, orderField, orderField, id, name);
+
+        ParametersBuilder parametersBuilder = ParametersBuilder.custom(orderField, orderDirection);
         parametersBuilder.add("id", id).add("name", name);
         return RestResponse.ok().add(DataConstant.RESP_KEY_LIST, service().list(parametersBuilder, pageNo, pageSize))
                 .add(DataConstant.RESP_KEY_TOTAL, service().count(parametersBuilder));
