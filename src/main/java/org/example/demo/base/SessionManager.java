@@ -13,10 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class SessionManager extends ConfigurableSession<User> implements InitializingBean {
 
-    public SessionManager() {
-        super();
-    }
-
     @Override
     protected UserLoader<User> createUserLoader() {
         return new ConsoleUserLoader(this);

@@ -19,10 +19,10 @@ public abstract class ConfigurableSession<T extends AbstractUser> extends AESSes
     private UserLoader<T> userLoader;
 
     @Resource
-    private  BasicDAO dao;
+    private BasicDAO dao;
 
     @Resource
-    private  AppConfig config;
+    private AppConfig config;
 
     public BasicDAO dao() {
         return dao;

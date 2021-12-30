@@ -78,7 +78,7 @@ public class AttributeBusiness extends AbstractBusiness<Attribute> {
             }
         });
         Map<String, String> dat = new HashMap<>();
-        data.entrySet().stream().forEach(e -> dat.put(e.getKey(), e.getValue().getValue()));
+        data.forEach((key, value) -> dat.put(key, value.getValue()));
         return dat;
     }
 

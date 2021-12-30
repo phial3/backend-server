@@ -220,7 +220,7 @@ public abstract class AbstractBusiness<T extends Entity>  implements EntityEvent
         Query<T> query2 = QueryBuilder.custom(getBeanType()).andIn("id", ids).build();
         service.delete(query2);
         if (!list.isEmpty()) {
-            Entity es[] = new Entity[list.size()];
+            Entity[] es = new Entity[list.size()];
             list.toArray(es);
             fireEntityEvent(new EntityEvent(EntityEvent.EventType.DELETE, es)
             );
@@ -395,7 +395,7 @@ public abstract class AbstractBusiness<T extends Entity>  implements EntityEvent
             }
         }
 
-        String ef[] = parametersBuilder.getExcludeFields();
+        String[] ef = parametersBuilder.getExcludeFields();
         if (ef != null && ef.length > 0) {
             builder.excludeFields(ef);
         }
@@ -477,7 +477,7 @@ public abstract class AbstractBusiness<T extends Entity>  implements EntityEvent
     }
 
     protected void evict(EntityEvent event) {
-        Entity es[] = event.entities();
+        Entity[] es = event.entities();
         if (es != null && es.length > 0) {
             for (Entity e : es) {
                 cache.evict(e);

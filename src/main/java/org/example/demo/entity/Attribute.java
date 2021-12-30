@@ -9,15 +9,14 @@ import org.phial.mybatisx.api.enums.IndexType;
 
 /**
  * 属性
- * @since 2021/4/8
+ *
  * @author mayanjun
+ * @since 2021/4/8
  */
 @Table(value = "t_attribute",
         indexes = {
                 @Index(value = "idx_name", columns = {
-                        @IndexColumn("group"),
-                        @IndexColumn("name"),
-                        @IndexColumn("user")
+                        @IndexColumn("group"), @IndexColumn("name"), @IndexColumn("user")
                 }, type = IndexType.UNIQUE)
         },
         comment = "属性")
