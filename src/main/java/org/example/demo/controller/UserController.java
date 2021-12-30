@@ -1,5 +1,6 @@
 package org.example.demo.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.example.demo.base.AbstractBusiness;
 import org.example.demo.base.DataConstant;
 import org.example.demo.base.DataController;
@@ -13,7 +14,6 @@ import org.phial.myrest.RestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -59,7 +59,7 @@ public class UserController extends DataController<User> {
     @PostMapping
     public Object save(@RequestBody User bean) {
         LOG.info("#### UserController save() param={}", JsonUtils.toJson(bean));
-        Assert.isTrue(StringUtils.hasText(bean.getUsername()), "name must not null!");
+        Assert.isTrue(StringUtils.isNotBlank(bean.getUsername()), "name must not null!");
         return super.save(bean);
     }
 
