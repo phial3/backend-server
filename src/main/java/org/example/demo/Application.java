@@ -1,8 +1,8 @@
 package org.example.demo;
 
 import org.apache.commons.lang3.StringUtils;
+import org.example.demo.event.ApplicationReadyListener;
 import org.example.demo.monitor.SystemMonitor;
-import org.phial.mybatisx.dal.event.ApplicationReadyListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +11,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.PropertiesPropertySource;
 
@@ -25,7 +26,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @project: backend-server
  * @datetime: 2021/12/27 16:30 Monday
  */
-//@ImportResource({"classpath:config/spring.xml"})
+@ImportResource({"classpath:config/spring.xml"})
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Application {
 

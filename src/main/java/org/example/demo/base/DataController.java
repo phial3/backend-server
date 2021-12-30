@@ -1,9 +1,15 @@
 package org.example.demo.base;
 
+import org.example.demo.entity.User;
 import org.phial.mybatisx.api.entity.Entity;
-import org.phial.myrest.RestResponse;
+import org.phial.mybatisx.api.entity.NamedEntity;
+import org.phial.mybatisx.common.utils.ClassUtils;
+import org.phial.rest.common.util.Strings;
+import org.phial.rest.web.BaseController;
+import org.phial.rest.web.RestResponse;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * @description:
@@ -11,46 +17,74 @@ import org.springframework.web.bind.annotation.*;
  * @author: gaoyanfei3
  * @datetime: 2021/12/27 18:50 Monday
  */
-@ControllerAdvice
-public abstract class DataController<T extends Entity> {
-
-    protected abstract AbstractBusiness<T> service();
+public abstract class DataController<T extends Entity> extends BaseController {
 
     public DataController() {
     }
 
-    @ResponseBody
-    @ExceptionHandler({Throwable.class})
-    protected Object handleException(Throwable e) {
-        return e.getMessage();
+    private Class<T> beanType = null;
+
+    /**
+     * 获取实际参数类型
+     *
+     * @return
+     */
+    protected Class<T> entityType() {
+        if (this.beanType != null) return beanType;
+        beanType = (Class<T>) ClassUtils.getFirstParameterizedType(this.getClass());
+        return beanType;
     }
 
+    protected abstract AbstractBusiness<T> business();
+
+    public User getUser() {
+        return business().getCurrentUser();
+    }
+
+    @Profiler
     @GetMapping("{id}")
-    protected Object get(@PathVariable long id) {
-        return service().get(id);
+    @Privileged("获取{module}详细数据")
+    public Object get(@PathVariable long id) {
+        return RestResponse.ok().add(DataConstant.RESP_KEY_ENTITY, business().get(id));
     }
 
+    @Profiler
+    @Privileged("删除{module}")
     @PostMapping("delete")
-    protected Object delete(@RequestBody Long[] ids) {
-        Assert.isTrue(ids != null && ids.length > 0, "参数ID错误");
-        service().delete(ids);
+    public Object delete(@RequestBody Long[] ids) {
+        Assert.isTrue(ids != null && ids.length > 0, "数据ID错误");
+        business().delete(ids);
         return RestResponse.ok();
     }
 
+    @Profiler
+    @Privileged("创建{module}")
     @PostMapping
-    protected Object save(@RequestBody T bean) {
-        return RestResponse.ok().add(DataConstant.RESP_KEY_DATA, service().save(bean));
+    public Object save(@RequestBody T bean) {
+        T ent = business().save(bean);
+        return RestResponse.ok().add(DataConstant.RESP_KEY_ENTITY, ent);
     }
 
+    @Profiler
+    @Privileged("更新{module}")
     @PostMapping("update")
-    protected Object update(@RequestBody T bean) {
-        service().update(bean);
+    public Object update(@RequestBody T bean) {
+        business().update(bean);
         return RestResponse.ok();
     }
 
     protected Object list(ParametersBuilder pb, Integer page, Integer pageSize) {
         return RestResponse.ok()
-                .add(DataConstant.RESP_KEY_LIST, service().list(pb, page, pageSize))
-                .add(DataConstant.RESP_KEY_TOTAL, service().count(pb));
+                .add(DataConstant.RESP_KEY_LIST, business().list(pb, page, pageSize))
+                .add(DataConstant.RESP_KEY_TOTAL, business().count(pb));
+    }
+
+    protected void fillNamedEntityParameters(ParametersBuilder pb, String name) {
+        if (NamedEntity.class.isAssignableFrom(entityType())) {
+            String pinyin = Strings.pinyin(name);
+            pb.add("__LIKE__pinyin", pinyin);
+        } else {
+            pb.add("__LIKE__name", name);
+        }
     }
 }

@@ -11,6 +11,10 @@ public interface DataConstant {
 
     String RESP_KEY_DATA = "data";
 
+    String RESP_KEY_SETTINGS = "settings";
+
+    String RESP_KEY_SYS_USER = "user";
+
     String RESP_KEY_ENTITY = "entity";
 
     String RESP_KEY_VALUE = "value";

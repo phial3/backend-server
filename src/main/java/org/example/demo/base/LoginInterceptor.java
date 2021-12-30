@@ -2,11 +2,10 @@ package org.example.demo.base;
 
 import org.apache.commons.lang3.StringUtils;
 import org.example.demo.entity.User;
-import org.phial.myrest.interceptor.AnnotationBasedHandlerInterceptor;
-import org.phial.myrest.session.SessionUser;
+import org.phial.rest.web.interceptor.AnnotationBasedHandlerInterceptor;
+import org.phial.rest.web.session.SessionUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequestInterceptor;
 
 import javax.annotation.Resource;

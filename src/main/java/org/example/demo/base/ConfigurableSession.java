@@ -1,12 +1,13 @@
 package org.example.demo.base;
 
 
+import org.example.demo.config.AppConfig;
 import org.phial.mybatisx.common.ServiceException;
 import org.phial.mybatisx.common.utils.ClassUtils;
 import org.phial.mybatisx.dal.dao.BasicDAO;
-import org.phial.myrest.session.AESSession;
-import org.phial.myrest.session.SessionUser;
-import org.phial.myrest.session.UserLoader;
+import org.phial.rest.web.session.AESSession;
+import org.phial.rest.web.session.SessionUser;
+import org.phial.rest.web.session.UserLoader;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.annotation.Resource;
@@ -15,22 +16,29 @@ import javax.servlet.http.Cookie;
 public abstract class ConfigurableSession<T extends AbstractUser> extends AESSession<T> implements InitializingBean {
 
     protected ThreadLocal<String> systemThreadLocal = new ThreadLocal<>();
+    private UserLoader<T> userLoader;
 
     @Resource
     private BasicDAO dao;
 
-    private UserLoader<T> userLoader;
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        configSession(userLoader());
-    }
+    @Resource
+    private AppConfig config;
 
     public BasicDAO dao() {
         return dao;
     }
 
+    public AppConfig config() {
+        return config;
+    }
+
     protected abstract void configSession(UserLoader<T> userLoader);
+
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        configSession(userLoader());
+    }
 
     /**
      * 返回用户加载器的实现类，由子类实现

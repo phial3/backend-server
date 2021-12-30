@@ -1,8 +1,6 @@
 package org.example.demo.config;
 
 import org.example.demo.base.AESKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -13,8 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "app-config")
 public class AppConfig implements InitializingBean {
-
-    private static final Logger LOG = LoggerFactory.getLogger(AppConfig.class);
 
     /**
      * 默认的API时间戳校验容忍度
@@ -34,9 +30,6 @@ public class AppConfig implements InitializingBean {
      */
     private String tokenCookieName = "token";
 
-    private AESKey consoleAesKey;
-
-
     private String systemName = "后台管理系统";
 
     private String redisHost = "127.0.0.1";
@@ -44,6 +37,8 @@ public class AppConfig implements InitializingBean {
     private boolean redisEnabled = false;
 
     private int serverPort;
+
+    private AESKey consoleAesKey;
 
     /**
      * 是否验证API时间戳的时效性，如果开启则调用接口时传入的时间戳参数与服务器时间差不能大于 apiTimestampTolerance 秒
@@ -152,24 +147,6 @@ public class AppConfig implements InitializingBean {
     }
 
     /**
-     * 获取 consoleAesKey
-     *
-     * @return consoleAesKey
-     */
-    public AESKey getConsoleAesKey() {
-        return consoleAesKey;
-    }
-
-    /**
-     * 设置 consoleAesKey
-     *
-     * @param consoleAesKey consoleAesKey 值
-     */
-    public void setConsoleAesKey(AESKey consoleAesKey) {
-        this.consoleAesKey = consoleAesKey;
-    }
-
-    /**
      * 获取 verifyApiTimestamp
      *
      * @return verifyApiTimestamp
@@ -239,5 +216,14 @@ public class AppConfig implements InitializingBean {
      */
     public void setServerPort(int serverPort) {
         this.serverPort = serverPort;
+    }
+
+
+    public AESKey getConsoleAesKey() {
+        return consoleAesKey;
+    }
+
+    public void setConsoleAesKey(AESKey consoleAesKey) {
+        this.consoleAesKey = consoleAesKey;
     }
 }

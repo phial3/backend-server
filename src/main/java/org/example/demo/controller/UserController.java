@@ -6,11 +6,10 @@ import org.example.demo.base.DataConstant;
 import org.example.demo.base.DataController;
 import org.example.demo.base.ParametersBuilder;
 import org.example.demo.business.UserBusiness;
-import org.example.demo.config.AppConfig;
 import org.example.demo.entity.User;
 import org.example.demo.utils.JsonUtils;
 import org.phial.mybatisx.api.query.SortDirection;
-import org.phial.myrest.RestResponse;
+import org.phial.rest.web.RestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -20,7 +19,7 @@ import java.util.Arrays;
 
 /**
  * @description:
- * @project: java-web-graalVM
+ * @project:
  * @author: gaoyanfei3
  * @datetime: 2021/12/27 16:38 Monday
  */
@@ -28,7 +27,7 @@ import java.util.Arrays;
 @RequestMapping("api/user")
 public class UserController extends DataController<User> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AppConfig.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     private UserBusiness business;
 
@@ -37,7 +36,7 @@ public class UserController extends DataController<User> {
     }
 
     @Override
-    protected AbstractBusiness<User> service() {
+    protected AbstractBusiness<User> business() {
         return business;
     }
 
@@ -59,7 +58,7 @@ public class UserController extends DataController<User> {
     @PostMapping
     public Object save(@RequestBody User bean) {
         LOG.info("#### UserController save() param={}", JsonUtils.toJson(bean));
-        Assert.isTrue(StringUtils.isNotBlank(bean.getUsername()), "name must not null!");
+        Assert.isTrue(StringUtils.isNotBlank(bean.getUsername()), "username must not null!");
         return super.save(bean);
     }
 
@@ -79,11 +78,11 @@ public class UserController extends DataController<User> {
                        @RequestParam(required = false) String name) {
 
         LOG.info("#### UserController list() pageNo={}, pageSize={}, orderField={}, sort={}, id={}, name={}",
-                pageNo, pageSize, orderField, orderField, id, name);
+                pageNo, pageSize, orderField, orderDirection, id, name);
 
         ParametersBuilder parametersBuilder = ParametersBuilder.custom(orderField, orderDirection);
         parametersBuilder.add("id", id).add("name", name);
-        return RestResponse.ok().add(DataConstant.RESP_KEY_LIST, service().list(parametersBuilder, pageNo, pageSize))
-                .add(DataConstant.RESP_KEY_TOTAL, service().count(parametersBuilder));
+        return RestResponse.ok().add(DataConstant.RESP_KEY_LIST, business().list(parametersBuilder, pageNo, pageSize))
+                .add(DataConstant.RESP_KEY_TOTAL, business().count(parametersBuilder));
     }
 }

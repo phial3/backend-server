@@ -5,7 +5,6 @@ import org.phial.mybatisx.api.query.Query;
 import org.phial.mybatisx.api.query.QueryBuilder;
 import org.phial.mybatisx.common.Assert;
 import org.phial.mybatisx.dal.dao.BasicDAO;
-import org.phial.myrest.session.AbstractSession;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,7 +23,7 @@ public class ConsoleUserLoader extends DefaultUserLoader<User> {
                 .andEquivalent(User::getUsername, username)
                 .build();
         User user = dao.queryOne(query);
-        Assert.notNull(user, AbstractSession.USERNAME_OR_PASSWORD_INCORRECT);
+        Assert.notNull(user, "用户名或密码错误!");
         return user;
     }
 }

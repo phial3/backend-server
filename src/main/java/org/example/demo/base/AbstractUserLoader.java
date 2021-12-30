@@ -1,6 +1,7 @@
 package org.example.demo.base;
 
-import org.phial.myrest.session.UserLoader;
+
+import org.phial.rest.web.session.UserLoader;
 
 public abstract class AbstractUserLoader<T extends AbstractUser> implements UserLoader<T> {
 

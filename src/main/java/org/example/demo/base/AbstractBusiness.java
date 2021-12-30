@@ -2,6 +2,10 @@ package org.example.demo.base;
 
 import org.apache.commons.lang3.StringUtils;
 import org.example.demo.entity.User;
+import org.example.demo.event.EntityCache;
+import org.example.demo.event.EntityEvent;
+import org.example.demo.event.EntityEventDispatcher;
+import org.example.demo.event.EntityEventListener;
 import org.phial.mybatisx.api.SFunction;
 import org.phial.mybatisx.api.entity.EditableEntity;
 import org.phial.mybatisx.api.entity.Entity;
@@ -13,17 +17,14 @@ import org.phial.mybatisx.common.Assert;
 import org.phial.mybatisx.common.ServiceException;
 import org.phial.mybatisx.common.utils.ClassUtils;
 import org.phial.mybatisx.dal.dao.BasicDAO;
-import org.phial.mybatisx.dal.event.EntityCache;
-import org.phial.mybatisx.dal.event.EntityEvent;
-import org.phial.mybatisx.dal.event.EntityEventDispatcher;
-import org.phial.mybatisx.dal.event.EntityEventListener;
 import org.phial.mybatisx.dal.generator.AnnotationHelper;
 import org.phial.mybatisx.dal.generator.AnnotationHolder;
 import org.phial.mybatisx.dal.util.Extras;
-import org.phial.myrest.session.SessionUser;
-import org.phial.util.Strings;
+import org.phial.rest.common.util.Strings;
+import org.phial.rest.web.session.SessionUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
 import java.lang.invoke.SerializedLambda;
@@ -50,11 +51,11 @@ public abstract class AbstractBusiness<T extends Entity>  implements EntityEvent
     @Resource
     protected SessionManager sessionManager;
 
-//    @Resource
-//    private EntityEventDispatcher dispatcher;
+    @Resource
+    private EntityEventDispatcher dispatcher;
 
-//    @Resource
-//    protected EntityCache cache;
+    @Resource
+    protected EntityCache cache;
 
     public static <T extends Entity> String getFieldColumn(SFunction<T, ?> dynamicField) throws Exception {
         // 直接调用writeReplace
@@ -75,6 +76,14 @@ public abstract class AbstractBusiness<T extends Entity>  implements EntityEvent
     private static String firstToLowerCase(String s) {
         if (Character.isLowerCase(s.charAt(0))) return s;
         else return Character.toLowerCase(s.charAt(0)) + s.substring(1);
+    }
+
+    public BasicDAO dao() {
+        return service;
+    }
+
+    protected TransactionTemplate transaction() {
+        return service.databaseRouter().getDatabaseSession().transaction();
     }
 
     protected Extras getExtras(T entity, boolean update) {
@@ -213,8 +222,7 @@ public abstract class AbstractBusiness<T extends Entity>  implements EntityEvent
         if (!list.isEmpty()) {
             Entity es[] = new Entity[list.size()];
             list.toArray(es);
-            fireEntityEvent(
-                    new EntityEvent(EntityEvent.EventType.DELETE, es)
+            fireEntityEvent(new EntityEvent(EntityEvent.EventType.DELETE, es)
             );
         }
     }
@@ -454,7 +462,7 @@ public abstract class AbstractBusiness<T extends Entity>  implements EntityEvent
     }
 
     protected AbstractBusiness<T> fireEntityEvent(EntityEvent event) {
-        //dispatcher.fireEntityEvent(event);
+        dispatcher.fireEntityEvent(event);
         return this;
     }
 
@@ -463,19 +471,19 @@ public abstract class AbstractBusiness<T extends Entity>  implements EntityEvent
         switch (event.type()) {
             case UPDATE:
             case DELETE:
-                //evict(event);
+                evict(event);
                 break;
         }
     }
 
-//    protected void evict(EntityEvent event) {
-//        Entity es[] = event.entities();
-//        if (es != null && es.length > 0) {
-//            for (Entity e : es) {
-//                cache.evict(e);
-//            }
-//        }
-//    }
+    protected void evict(EntityEvent event) {
+        Entity es[] = event.entities();
+        if (es != null && es.length > 0) {
+            for (Entity e : es) {
+                cache.evict(e);
+            }
+        }
+    }
 
     @Override
     public boolean support(EntityEvent event) {

@@ -3,8 +3,8 @@ package org.example.demo.base;
 
 import org.phial.mybatisx.api.query.QueryBuilder;
 import org.phial.mybatisx.common.Assert;
-import org.phial.myrest.session.AbstractSession;
-import org.phial.myrest.session.SessionUser;
+import org.phial.rest.web.session.AbstractSession;
+import org.phial.rest.web.session.SessionUser;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
