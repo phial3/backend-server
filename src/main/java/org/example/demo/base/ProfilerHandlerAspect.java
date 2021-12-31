@@ -33,7 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 日志记录器处理器
  *
- * @author mayanjun
+ * @author phial
  * @since 2019-10-10
  */
 @Order
@@ -67,7 +67,7 @@ public class ProfilerHandlerAspect extends CachedAspect<Profiler> {
         return methodCache.computeIfAbsent(method, m -> {
             String methodName = m.toString();
             Query<MethodMapping> query = QueryBuilder.custom(MethodMapping.class)
-                    .andEquivalent(MethodMapping::getName, methodName)
+                    .andEquivalent("name", methodName)
                     .build();
             MethodMapping mapping = dao.queryOne(query);
             if (mapping == null) {

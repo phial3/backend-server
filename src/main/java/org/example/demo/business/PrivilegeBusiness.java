@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * 权限管理
  *
- * @author mayanjun
+ * @author phial
  * @vendor JDD (https://www.jddglobal.com)
  * @since 2019-07-06
  */

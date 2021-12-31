@@ -5,8 +5,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.example.demo.ApplicationDataInitializer;
-import org.example.demo.business.PrivilegeBusiness;
+import org.example.demo.config.ApplicationDataInitializer;
 import org.example.demo.entity.User;
 import org.phial.mybatisx.common.Assert;
 import org.phial.mybatisx.common.utils.CommonUtils;
@@ -15,17 +14,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
  * 权限检查拦截器
  *
- * @author mayanjun
- * @vendor mayanjun.org
+ * @author phial
+ * @vendor 
  * @generator consolegen 1.0
- * @manufacturer https://mayanjun.org
+ * @manufacturer 
  * @since 2019-10-10
  */
 @Aspect

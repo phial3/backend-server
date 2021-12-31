@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * 属性管理
  * @since 2019-07-06
- * @author mayanjun
+ * @author phial
  * @vendor JDD (https://www.jddglobal.com)
  */
 @Component
@@ -39,9 +39,9 @@ public class AttributeBusiness extends AbstractBusiness<Attribute> {
 
     public Attribute getAttribute(String group, String name, String user) {
         Query<Attribute> query = QueryBuilder.custom(Attribute.class)
-                .andEquivalent(Attribute::getGroup, group)
-                .andEquivalent(Attribute::getName, name)
-                .andEquivalent(Attribute::getUser, user)
+                .andEquivalent("group", group)
+                .andEquivalent("name", name)
+                .andEquivalent("user", user)
                 .forUpdate()
                 .build();
         return service.queryOne(query);
@@ -192,9 +192,9 @@ public class AttributeBusiness extends AbstractBusiness<Attribute> {
         // if (val != null) return val;
 
         Query<Attribute> query = QueryBuilder.custom(Attribute.class)
-                .andEquivalent(Attribute::getGroup, GROUP_SETTINGS)
-                .andEquivalent(Attribute::getName, name)
-                .andEquivalent(Attribute::getUser, "")
+                .andEquivalent("group", GROUP_SETTINGS)
+                .andEquivalent("name", name)
+                .andEquivalent("user", "")
                 .forUpdate()
                 .build();
         Attribute attribute = service.queryOne(query);

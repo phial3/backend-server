@@ -1,6 +1,8 @@
-package org.example.demo;
+package org.example.demo.config;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.assertj.core.util.Lists;
+import org.example.demo.ApplicationContextComponent;
 import org.example.demo.base.*;
 import org.example.demo.business.AttributeBusiness;
 import org.example.demo.entity.Menu;
@@ -16,14 +18,11 @@ import org.phial.rest.common.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -36,26 +35,19 @@ import java.util.regex.Pattern;
  *
  * @author
  * @vendor
- * @since 2019-07-06
+ * @since
  */
 @Component("ApplicationDataInitializer")
-public class ApplicationDataInitializer implements ApplicationContextAware, BeanPostProcessor {
+public class ApplicationDataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationDataInitializer.class);
 
     public static final String INITIALIZER_USERNAME = "SYSTEM";
     private static Map<String, PrivilegeMetaData> PRIVILEGE_METADATA = new HashMap<>();
 
-    @Resource
     private BasicDAO dao;
-
-    @Resource
     private SessionManager sessionManager;
-
-    @Resource
     private AttributeBusiness attributeBusiness;
-
-    private ApplicationContext applicationContext;
 
     private static final String MENUS[][] = new String[][]{
             // #### children-count, name, icon, url, id
@@ -69,9 +61,23 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
             // ####
     };
 
-    @PostConstruct
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        init();
+    }
+
     public void init() {
         try {
+            ApplicationContext context = ApplicationContextComponent.getApplicationContext();
+            dao = context.getBean(BasicDAO.class);
+            sessionManager = context.getBean(SessionManager.class);
+            attributeBusiness = context.getBean(AttributeBusiness.class);
+
+            if (ObjectUtils.anyNull(dao, sessionManager, attributeBusiness)) {
+                LOG.error("init bean error!");
+                return;
+            }
+
             synchronized (this) {
                 initDirs();
                 initDatabase();
@@ -109,11 +115,11 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
      * 初始化权限数据
      */
     private void initPrivileges() {
-        Map<String, Object> beans = applicationContext.getBeansWithAnnotation(PrivilegedMeta.class);
-
+        ApplicationContext context = ApplicationContextComponent.getApplicationContext();
+        Map<String, Object> beans = context.getBeansWithAnnotation(PrivilegedMeta.class);
         Map<String, PrivilegeMetaData> privilegeMetaDataMap = new HashMap<>();
 
-        if (beans != null && !beans.isEmpty()) {
+        if (!beans.isEmpty()) {
             beans.values().forEach(e -> {
                 Class<?> cls = e.getClass();
 
@@ -275,6 +281,8 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
         return sb.toString();
     }
 
+
+
     public static class PrivilegeMetaData {
         private String methodName;
         private String name;
@@ -356,7 +364,7 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
     private void initSystemUser() {
         // create default user
         User user = dao.queryOne(QueryBuilder.custom(User.class)
-                .andEquivalent(User::getUsername, "admin")
+                .andEquivalent("username", "admin")
                 .build());
 
         if (user == null) {
@@ -442,11 +450,4 @@ public class ApplicationDataInitializer implements ApplicationContextAware, Bean
         long sid = dao.save(m);
         LOG.info("Menu created: id={}, name={}", sid, name);
     }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
-
-
 }

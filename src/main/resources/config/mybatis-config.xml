@@ -22,9 +22,9 @@
         <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
     </settings>
 
-<!--    <typeAliases>-->
-<!--        <package name="org.example.demo.entity"/>-->
-<!--    </typeAliases>-->
+    <typeAliases>
+        <package name="org.example.demo.entity"/>
+    </typeAliases>
 
 <!--    <mappers>-->
 <!--        <mapper resource="mapper/UserMapper.xml" />-->

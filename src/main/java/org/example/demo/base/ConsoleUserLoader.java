@@ -18,7 +18,7 @@ public class ConsoleUserLoader extends DefaultUserLoader<User> {
     protected User queryUser(String username) {
         BasicDAO dao = session().dao();
         Query<User> query = QueryBuilder.custom(User.class)
-                .andEquivalent(User::getUsername, username)
+                .andEquivalent("username", username)
                 .build();
         User user = dao.queryOne(query);
         Assert.notNull(user, "用户名或密码错误!");

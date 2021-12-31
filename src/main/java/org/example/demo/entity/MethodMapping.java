@@ -10,7 +10,7 @@ import org.phial.mybatisx.api.enums.DataType;
 /**
  * 方法名称映射
  * @since 2021/4/8
- * @author mayanjun
+ * @author phial
  */
 @Table(value = "t_mms_method_mapping",
         indexes = {

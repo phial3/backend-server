@@ -13,7 +13,7 @@ import org.phial.mybatisx.api.enums.IndexType;
 /**
  * 权限
  *
- * @author mayanjun
+ * @author phial
  * @since 2021/4/8
  */
 @Table(value = "t_privilege",

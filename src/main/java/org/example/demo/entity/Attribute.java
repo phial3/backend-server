@@ -10,7 +10,7 @@ import org.phial.mybatisx.api.enums.IndexType;
 /**
  * 属性
  *
- * @author mayanjun
+ * @author phial
  * @since 2021/4/8
  */
 @Table(value = "t_attribute",

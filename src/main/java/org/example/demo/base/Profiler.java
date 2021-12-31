@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * 日志分析工具注解
  * @since 2019-10-10
- * @author mayanjun
+ * @author phial
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

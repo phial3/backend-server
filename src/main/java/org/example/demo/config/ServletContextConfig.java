@@ -17,10 +17,10 @@ import java.lang.reflect.Field;
 /**
  * Servlet初始化回调
  *
- * @author mayanjun
- * @vendor mayanjun.org
+ * @author phial
+ * @vendor 
  * @generator consolegen 1.0
- * @manufacturer https://mayanjun.org
+ * @manufacturer 
  * @since 2019-10-10
  */
 @Component

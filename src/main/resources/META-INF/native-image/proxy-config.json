@@ -209,9 +209,86 @@
     },
     {
         "interfaces": [
+            "org.springframework.web.servlet.handler.MatchableHandlerMapping",
+            "org.springframework.web.servlet.HandlerMapping",
+            "org.springframework.core.Ordered",
+            "org.springframework.beans.factory.BeanNameAware",
+            "org.springframework.web.context.ServletContextAware",
+            "org.springframework.context.ApplicationContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.beans.factory.InitializingBean",
+            "org.springframework.web.servlet.HandlerMapping",
+            "org.springframework.core.Ordered",
+            "org.springframework.beans.factory.BeanNameAware",
+            "org.springframework.web.context.ServletContextAware",
+            "org.springframework.context.ApplicationContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.servlet.HandlerAdapter",
+            "org.springframework.core.Ordered"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.servlet.ViewResolver",
+            "org.springframework.core.Ordered",
+            "org.springframework.beans.factory.InitializingBean",
+            "org.springframework.context.ApplicationContextAware",
+            "org.springframework.web.context.ServletContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.core.Ordered",
+            "org.springframework.web.servlet.ViewResolver",
+            "org.springframework.web.context.ServletContextAware",
+            "org.springframework.context.ApplicationContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.servlet.ViewResolver",
+            "org.springframework.core.Ordered",
+            "org.springframework.beans.factory.InitializingBean",
+            "org.springframework.web.context.ServletContextAware",
+            "org.springframework.context.ApplicationContextAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.boot.availability.ApplicationAvailability",
+            "org.springframework.context.ApplicationListener"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.context.LifecycleProcessor",
+            "org.springframework.beans.factory.BeanFactoryAware"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.beans.factory.FactoryBean",
+            "org.springframework.beans.factory.BeanClassLoaderAware",
+            "org.springframework.context.ApplicationListener"
+        ]
+    },
+    {
+        "interfaces": [
             "java.lang.reflect.WildcardType",
             "org.springframework.core.SerializableTypeWrapper$SerializableTypeProxy",
             "java.io.Serializable"
+        ]
+    },
+    {
+        "interfaces": [
+            "org.springframework.web.servlet.HandlerExceptionResolver",
+            "org.springframework.core.Ordered"
         ]
     },
     {

@@ -5,7 +5,7 @@ import org.example.demo.base.AttributeItem;
 /**
  * 系统设置
  * @since 2021/4/8
- * @author mayanjun
+ * @author phial
  */
 public class SysSettings {
 

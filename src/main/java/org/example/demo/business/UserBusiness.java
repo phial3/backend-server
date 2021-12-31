@@ -53,7 +53,7 @@ public class UserBusiness extends AbstractBusiness<User> {
             Assert.isTrue(RegexUtils.checkName(entity.getUsername()), "username is illegal !");
             List<User> records = dao().query(
                     QueryBuilder.custom(User.class)
-                            .andEquivalent(User::getUsername, entity.getUsername())
+                            .andEquivalent("username", entity.getUsername())
                             .build()
             );
             Assert.isTrue(records.isEmpty(), "username has exists!");

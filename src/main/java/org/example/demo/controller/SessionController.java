@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author mayanjun
+ * @author phial
  * @vendor JDD (https://www.jddglobal.com)
  * @since 2019-07-10
  */

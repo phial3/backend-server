@@ -36,8 +36,8 @@ public class DefaultUserLoader<T extends AbstractUser> extends AbstractUserLoade
      */
     protected T queryUser(String username) {
         QueryBuilder<T> query = QueryBuilder.custom(session().userType())
-                .andEquivalent(T::getUsername, username)
-                .andEquivalent(T::getEnabled, true);
+                .andEquivalent("username", username)
+                .andEquivalent("enabled", true);
 
         T user = session().dao().queryOne(query.build());
         Assert.notNull(user, AbstractSession.USERNAME_OR_PASSWORD_INCORRECT);

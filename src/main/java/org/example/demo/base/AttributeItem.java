@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 修饰一个属性项
  * @since 2020/11/25
- * @author mayanjun
+ * @author phial
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

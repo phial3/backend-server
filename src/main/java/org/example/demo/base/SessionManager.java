@@ -25,9 +25,9 @@ public class SessionManager extends ConfigurableSession<User> implements Initial
     @Override
     protected void configSession(UserLoader<User> userLoader) {
         setUserLoader(userLoader);
-//        setDomain(config.getDomain());
-//        setTokenName(config.getTokenCookieName());
-//        setCrypto(new BouncyCastleCrypto(config.getConsoleAesKey().secretKeyStore()));
+        setDomain(config.getDomain());
+        setTokenName(config.getTokenCookieName());
+        setCrypto(new BouncyCastleCrypto(config.getConsoleAesKey().secretKeyStore()));
     }
 
     @Override

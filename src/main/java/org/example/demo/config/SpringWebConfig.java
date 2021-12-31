@@ -1,8 +1,5 @@
 package org.example.demo.config;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -17,13 +14,12 @@ import java.util.List;
 /**
  * 配置Spring MVC 拦截器等
  *
- * @author mayanjun
+ * @author phial
  * @since 2019-10-10
  */
 @Configuration
-public class SpringWebConfig implements WebMvcConfigurer, ApplicationContextAware {
+public class SpringWebConfig implements WebMvcConfigurer {
 
-    private ApplicationContext context;
     @Resource
     private ThreadPoolTaskExecutor executor;
 
@@ -43,10 +39,6 @@ public class SpringWebConfig implements WebMvcConfigurer, ApplicationContextAwar
         }
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext appContext) throws BeansException {
-        this.context = appContext;
-    }
 
     @Override
     public void configureAsyncSupport(AsyncSupportConfigurer configurer) {

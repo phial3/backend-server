@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 /**
  * Display config information
  * @since 2020/9/7
- * @author mayanjun
+ * @author phial
  */
 @Command(name = "config", description = "Show server config")
 public class ConfigCommandHandler extends CommandHandler {

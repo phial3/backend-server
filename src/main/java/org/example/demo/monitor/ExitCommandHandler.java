@@ -7,7 +7,7 @@ import java.util.concurrent.Callable;
 /**
  * Only used to display help information
  * @since 2020/9/7
- * @author mayanjun
+ * @author phial
  */
 @Command(name = "exit/quit", description = "Exit current session")
 public abstract class ExitCommandHandler implements Callable<String> {

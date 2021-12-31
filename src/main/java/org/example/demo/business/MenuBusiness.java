@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 菜单管理
  *
- * @author mayanjun
+ * @author phial
  * @vendor JDD (https://www.jddglobal.com)
  * @since 2019-07-06
  */
@@ -84,7 +84,7 @@ public class MenuBusiness extends AbstractBusiness<Menu> {
             super.delete(ids);
             for (Long id : ids) {
                 service.delete(QueryBuilder.custom(Menu.class)
-                        .andEquivalent(Menu::getParentId, id)
+                        .andEquivalent("parentId", id)
                         .build()
                 );
             }
@@ -94,7 +94,7 @@ public class MenuBusiness extends AbstractBusiness<Menu> {
 
     public Menu getByCode(String code) {
         QueryBuilder<Menu> queryBuilder = QueryBuilder.custom(Menu.class);
-        queryBuilder.andEquivalent(Menu::getMenuCode, code);
+        queryBuilder.andEquivalent("menuCode", code);
         List<Menu> menus = doQuery(queryBuilder);
         return CollectionUtils.isEmpty(menus) ? null : menus.get(0);
     }
