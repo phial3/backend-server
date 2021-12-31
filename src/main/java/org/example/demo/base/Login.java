@@ -1,6 +1,7 @@
 package org.example.demo.base;
 
 
+import org.example.demo.base.interceptor.LoginInterceptor;
 import org.phial.rest.web.interceptor.Interceptor;
 
 import java.lang.annotation.*;

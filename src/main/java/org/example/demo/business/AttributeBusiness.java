@@ -10,11 +10,13 @@ import org.example.demo.entity.SysSettings;
 import org.example.demo.entity.User;
 import org.phial.mybatisx.api.query.Query;
 import org.phial.mybatisx.api.query.QueryBuilder;
+import org.phial.mybatisx.starter.cache.CacheClient;
 import org.phial.rest.web.session.SessionUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -34,8 +36,8 @@ public class AttributeBusiness extends AbstractBusiness<Attribute> {
 
     private static final String GROUP_SETTINGS = "settings";
 
-//    @Resource
-//    private CacheClient cacheClient;
+    @Resource
+    private CacheClient cacheClient;
 
     public Attribute getAttribute(String group, String name, String user) {
         Query<Attribute> query = QueryBuilder.custom(Attribute.class)

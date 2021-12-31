@@ -1,8 +1,7 @@
-package org.example.demo.config;
+package org.example.demo;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.assertj.core.util.Lists;
-import org.example.demo.ApplicationContextComponent;
 import org.example.demo.base.*;
 import org.example.demo.business.AttributeBusiness;
 import org.example.demo.entity.Menu;

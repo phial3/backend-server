@@ -1,10 +1,7 @@
 package org.example.demo.controller;
 
 import org.apache.commons.lang3.StringUtils;
-import org.example.demo.base.AbstractBusiness;
-import org.example.demo.base.DataConstant;
-import org.example.demo.base.DataController;
-import org.example.demo.base.ParametersBuilder;
+import org.example.demo.base.*;
 import org.example.demo.business.UserBusiness;
 import org.example.demo.entity.User;
 import org.example.demo.utils.JsonUtils;
@@ -23,8 +20,10 @@ import java.util.Arrays;
  * @author: gaoyanfei3
  * @datetime: 2021/12/27 16:38 Monday
  */
+@Login
 @RestController
 @RequestMapping("api/user")
+@PrivilegedMeta(@MetaProperty(name = "module", value = "用户"))
 public class UserController extends DataController<User> {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);

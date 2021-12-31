@@ -1,6 +1,7 @@
 package org.example.demo.base;
 
 
+import org.example.demo.config.AppConfig;
 import org.phial.mybatisx.common.ServiceException;
 import org.phial.mybatisx.common.utils.ClassUtils;
 import org.phial.mybatisx.dal.dao.BasicDAO;
@@ -20,8 +21,16 @@ public abstract class ConfigurableSession<T extends AbstractUser> extends AESSes
     @Resource
     private BasicDAO dao;
 
+    @Resource
+    private AppConfig config;
+
+
     public BasicDAO dao() {
         return dao;
+    }
+
+    public AppConfig config() {
+        return config;
     }
 
     protected abstract void configSession(UserLoader<T> userLoader);

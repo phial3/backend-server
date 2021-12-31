@@ -40,6 +40,8 @@ public class AppConfig implements InitializingBean {
 
     private AESKey consoleAesKey;
 
+    private boolean clusterEnabled = false;
+
     /**
      * 是否验证API时间戳的时效性，如果开启则调用接口时传入的时间戳参数与服务器时间差不能大于 apiTimestampTolerance 秒
      */
@@ -58,6 +60,9 @@ public class AppConfig implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        // TODO: so somethings after bean post process
+        // clusterEnabled = true;
+
         // 修正参数
         if (this.verifyApiTimestamp) {
             if (apiTimestampTolerance <= 0) {
@@ -225,5 +230,13 @@ public class AppConfig implements InitializingBean {
 
     public void setConsoleAesKey(AESKey consoleAesKey) {
         this.consoleAesKey = consoleAesKey;
+    }
+
+    public boolean isClusterEnabled() {
+        return clusterEnabled;
+    }
+
+    public void setClusterEnabled(boolean clusterEnabled) {
+        this.clusterEnabled = clusterEnabled;
     }
 }

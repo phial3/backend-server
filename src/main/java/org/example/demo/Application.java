@@ -11,9 +11,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.io.File;
 import java.io.FileReader;
@@ -26,7 +29,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @project: backend-server
  * @datetime: 2021/12/27 16:30 Monday
  */
+@EnableAsync
+@EnableScheduling
 @ImportResource({"classpath:config/spring.xml"})
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Application {
 

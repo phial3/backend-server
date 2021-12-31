@@ -5,7 +5,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.example.demo.config.ApplicationDataInitializer;
+import org.example.demo.ApplicationDataInitializer;
 import org.example.demo.entity.User;
 import org.phial.mybatisx.common.Assert;
 import org.phial.mybatisx.common.utils.CommonUtils;

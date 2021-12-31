@@ -1,11 +1,15 @@
-package org.example.demo.base;
+package org.example.demo.base.interceptor;
 
 import org.apache.commons.lang3.StringUtils;
+import org.example.demo.base.InterceptorOrder;
+import org.example.demo.base.Login;
+import org.example.demo.base.SessionManager;
 import org.example.demo.entity.User;
 import org.phial.rest.web.interceptor.AnnotationBasedHandlerInterceptor;
 import org.phial.rest.web.session.SessionUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequestInterceptor;
 
 import javax.annotation.Resource;
@@ -15,13 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 登录检查拦截器
  *
- * @author phial
- * @vendor phial.org
- * @generator consolegen 1.0
- * @manufacturer https://phial.org
- * @since 2019-10-10
+ WebRequestInterceptor的入参WebRequest是包装了HttpServletRequest 和HttpServletResponse的，通过WebRequest获取Request中的信息更简便。
+ WebRequestInterceptor的preHandle是没有返回值的，说明该方法中的逻辑并不影响后续的方法执行，所以这个接口实现就是为了获取Request中的信息，或者预设一些参数供后续流程使用。
+ HandlerInterceptor的功能更强大也更基础，可以在preHandle方法中就直接拒绝请求进入controller方法。
  */
-//@Component
+@Component
 public class LoginInterceptor extends AnnotationBasedHandlerInterceptor {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoginInterceptor.class);
@@ -45,7 +47,9 @@ public class LoginInterceptor extends AnnotationBasedHandlerInterceptor {
         if (login.checkUser()) {
             try {
                 SessionUser<User> user = session.getUser(request);
-                if (user == null) return false;
+                if (user == null) {
+                    return false;
+                }
                 if (StringUtils.isNotBlank(user.getDescription())) {
                     request.setAttribute("__current_user", user.getUsername() + "(" + user.getDescription() + ")");
                 } else {
@@ -56,7 +60,10 @@ public class LoginInterceptor extends AnnotationBasedHandlerInterceptor {
             } catch (Exception e) {
                 LOG.error("Unknown exception on login, uri={}, message={}", request.getRequestURI(), e.getMessage());
                 String uri = request.getRequestURI();
-                if (uri.startsWith("/api")) throw e;
+                if (uri.startsWith("/api")) {
+                    throw e;
+                }
+
                 response.sendRedirect("/login");
                 return false;
             }

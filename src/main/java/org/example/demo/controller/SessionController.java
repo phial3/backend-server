@@ -31,7 +31,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("api/session")
-@AotProxyHint(targetClass = org.example.demo.controller.SessionController.class, proxyFeatures = ProxyBits.IS_STATIC)
 public class SessionController extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SessionController.class);
