@@ -19,7 +19,7 @@ public class DefaultUserLoader<T extends AbstractUser> extends AbstractUserLoade
 
     @Override
     public SessionUser<T> loadUser(String username) {
-        Assert.notBlank(username, "用户名不能为空");
+        Assert.notBlank(username, "username must not null.");
         T user = queryUser(username);
         SessionUser<T> sessionUser = new SessionUser<>(user.getUsername());
         sessionUser.setId(user.getId());

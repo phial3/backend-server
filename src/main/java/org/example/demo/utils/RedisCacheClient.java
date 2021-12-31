@@ -5,13 +5,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
+import org.example.demo.entity.User;
 import org.phial.mybatisx.starter.cache.CacheClient;
 import org.phial.mybatisx.starter.cache.CacheKey;
+import org.phial.rest.web.session.SessionUser;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Set;
@@ -24,14 +27,15 @@ import java.util.concurrent.locks.Lock;
  * @author mayanjun
  * @since 2020/12/25
  */
+@Component
 public class RedisCacheClient implements CacheClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(RedisCacheClient.class);
 
     private ObjectMapper mapper;
-
     private Config config;
     private RedissonClient client;
+    private TypeReference<SessionUser<User>> typeReference;
 
     private RedisCacheClient() {
     }
@@ -46,6 +50,18 @@ public class RedisCacheClient implements CacheClient {
 
     private RedissonClient client() {
         return client;
+    }
+
+    public void setUserCache(SessionUser<User> user) {
+        set(CacheKey.SYSTEM, user.getOriginUser().getUsername(), user, 60 * 60);
+    }
+
+    public void removeUserCache(SessionUser<User> user) {
+        delete(CacheKey.SYSTEM, user.getOriginUser().getUsername());
+    }
+
+    public SessionUser<User> getUserFromCache(String username) {
+        return get(CacheKey.SYSTEM, username, typeReference);
     }
 
     @Override
