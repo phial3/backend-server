@@ -44,11 +44,9 @@ public class SessionManager extends ConfigurableSession<User> implements Initial
 
     @Override
     public SessionUser<User> getUser(HttpServletRequest request) {
-        String username = (String) request.getAttribute("username");
-        Assert.notNull(username, "username must not null!");
-        SessionUser<User> user = getUser(username);
-        this.currentUser.set(user);
-        return user;
+        SessionUser<User> cacheUser = cacheClient.getUserFromCache(request.getHeader("clientId"));
+        this.currentUser.set(cacheUser);
+        return cacheUser;
     }
 
     @Override
@@ -60,7 +58,7 @@ public class SessionManager extends ConfigurableSession<User> implements Initial
 
     @Override
     public SessionUser<User> signIn(String username, String password, HttpServletResponse response) {
-        return cacheClient.getUserFromCache(username);
+        return getUser(username);
     }
 
     public SessionUser<User> getUser(String username) {

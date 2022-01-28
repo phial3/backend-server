@@ -14,8 +14,6 @@ import org.phial.rest.web.RestResponse;
 import org.phial.rest.web.session.SessionUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.nativex.hint.AotProxyHint;
-import org.springframework.nativex.hint.ProxyBits;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,7 +49,7 @@ public class SessionController extends BaseController {
         try {
             LOG.info("#### SessionController sign() params={}", JsonUtils.toJson(user));
             SessionUser<User> signResult = sessionManager.signIn(user.getUsername(), user.getPassword(), response);
-            return RestResponse.ok(signResult.getOriginUser());
+            return RestResponse.ok(signResult.getLastLoginTime());
         } catch (ServiceException e) {
             throw new ServiceException(e.getStatus(), "用户名或者密码错误");
         }
